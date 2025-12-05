@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encontro De Solteiros 35+ | Nossa Aldeia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <style>
+        /* Configuração de fonte padrão */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcf8f7; /* Um off-white muito suave, fundo liso */
+            color: #333;
+        }
+
+        /* Estilos personalizados com cores baseadas na identidade visual (Terracota e Neutros) */
+        .color-primary {
+            background-color: #c05d53; /* Terracota / Vermelho mais quente */
+        }
+        .text-primary {
+            color: #c05d53;
+        }
+        .border-primary {
+            border-color: #c05d53;
+        }
+        
+        /* Botão principal de CTA com sombra e efeito hover suave */
+        .btn-cta {
+            background-color: #c05d53;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            text-transform: uppercase;
+            box-shadow: 0 10px 15px -3px rgba(192, 93, 83, 0.5), 0 4px 6px -2px rgba(192, 93, 83, 0.05);
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .btn-cta:hover {
+            background-color: #a84c42; /* Tom mais escuro no hover */
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px -5px rgba(192, 93, 83, 0.6), 0 10px 10px -5px rgba(192, 93, 83, 0.1);
+        }
+
+        /* Animações leves ao descer a página */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Estilo para a seção de Prova Social */
+        .testimonial-card {
+            background-color: #ffffff;
+            border-left: 5px solid #c05d53;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            padding: 2rem;
+            border-radius: 1rem;
+        }
+
+        /* Estilo para a seção de Encerramento/Investimento: Tom mais suave */
+        .footer-cta {
+            background-color: rgba(192, 93, 83, 0.9); /* Terracota mais escuro e opaco */
+            color: #fcf8f7;
+        }
+        
+        /* Estilização para o bloco de Cronograma (limpo e elegante) */
+        .topic-card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+            padding: 1.5rem;
+            transition: transform 0.3s;
+        }
+        .topic-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Hero Section - AGORA CLEAN E LISO */
+        .hero-section {
+            background-color: #fcf8f7; /* Cor de fundo liso */
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem; /* Adicionado padding para garantir espaço */
+        }
+        
+        /* Removido hero-overlay, pois não há imagem de fundo */
+        
+        /* Estilo para a tag de destaque (MUITO IMPORTANTE) - ATUALIZADO */
+        .highlight-text {
+            background-color: #c05d53; /* Fundo na cor primária (Terracota) */
+            color: #ffffff; /* Texto branco */
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+        
+        /* Estilo para o carrossel de depoimentos */
+        .carousel-item {
+            display: none;
+            animation: fadeIn 0.8s ease-out;
+        }
+        .carousel-item.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav id="sticky-nav" class="fixed top-0 left-0 right-0 bg-white shadow-md z-50 transform -translate-y-full transition-transform duration-300 ease-in-out">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+            <div class="flex-shrink-0">
+                <img class="h-8 w-auto" src="https://i.ibb.co/zhCZsPyz/logo.png" alt="Nossa Aldeia Logo" onerror="this.onerror=null; this.src='https://placehold.co/100x32/c05d53/ffffff?text=Nossa+Aldeia'">
+            </div>
+            <a href="#cta-bottom" class="btn-cta text-sm py-2 px-4 shadow-none hover:shadow-lg transition-all duration-200">
+                Quero Participar!
+            </a>
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <div class="p-8 md:p-16 rounded-xl max-w-4xl mx-auto fade-in-up">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-gray-800 leading-tight mb-4 tracking-tighter">
+                O Espaço que Você Merece
+            </h1>
+            <h2 class="text-xl md:text-3xl font-light text-gray-600 mb-8">
+                <span class="font-semibold text-primary">Encontro De Solteiros 35+:</span> Uma jornada de <span class="highlight-text">afeto, presença e novos sentidos</span> para sua vida relacional.
+            </h2>
+            <a href="#cta-main" class="btn-cta text-xl mt-4">
+                GARANTA SUA VAGA NO GRUPO <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+            <p class="text-sm text-primary mt-4 font-light">ATENÇÃO: Vagas <strong class="font-bold highlight-text">extremamente limitadas</strong> (apenas 10 por turma).</p>
+        </div>
+    </header>
+
+    <section class="py-16 md:py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+                
+                <div class="lg:col-span-1 fade-in-up" data-delay="100">
+                    <h3 class="text-3xl md:text-4xl font-bold mb-4 text-primary">
+                        Você já se sentiu...
+                    </h3>
+                    <p class="text-lg text-gray-600">
+                        ...sem um espaço profundo para falar sobre a vida de solteiro(a) 35+, livre de clichês e julgamentos?
+                    </p>
+                </div>
+                
+                <div class="lg:col-span-2 space-y-8">
+                    <div class="flex items-start space-x-4 fade-in-up" data-delay="200">
+                        <i class="fas fa-comment-slash text-3xl text-primary mt-1 flex-shrink-0"></i>
+                        <div>
+                            <h4 class="text-xl font-semibold">Cansado(a) de superficialidade?</h4>
+                            <p class="text-gray-500">Apps, encontros vazios e a ilusão de conexão que não preenche.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4 fade-in-up" data-delay="300">
+                        <i class="fas fa-map-marked-alt text-3xl text-primary mt-1 flex-shrink-0"></i>
+                        <div>
+                            <h4 class="text-xl font-semibold">Perdido(a) no Recomeço?</h4>
+                            <p class="text-gray-500">Luto amoroso, recomeços, e a busca por um novo projeto de vida pessoal.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4 fade-in-up" data-delay="400">
+                        <i class="fas fa-heart-crack text-3xl text-primary mt-1 flex-shrink-0"></i>
+                        <div>
+                            <h4 class="text-xl font-semibold">Repetindo Padrões?</h4>
+                            <p class="text-gray-500">Olhar sistêmico para os vínculos que você repete e a chance de ressignificá-los.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="text-center mt-16 fade-in-up" data-delay="500" id="cta-main">
+                <a href="#cta-bottom" class="btn-cta text-lg">
+                    Quero Encontrar Novos Sentidos <i class="fas fa-handshake ml-2"></i>
+                </a>
+            </div>
+            <p class="text-center text-sm text-primary mt-4 font-bold fade-in-up">
+                <span class="highlight-text">Últimas Vagas</span> disponíveis para a próxima turma.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-fcf8f7">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="text-3xl md:text-5xl font-extrabold text-center text-gray-800 fade-in-up">
+                O que vamos Conversar
+            </h3>
+            <p class="text-xl md:text-2xl font-light text-center mb-12 text-gray-600 fade-in-up" data-delay="100">
+                Com Profundidade e Sem Julgamentos
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="topic-card fade-in-up" data-delay="100">
+                    <h4 class="text-xl font-bold mb-2 text-primary">Solidão e Autonomia</h4>
+                    <p class="text-gray-600">Transformar a angústia em liberdade e fortalecer sua autoestima emocional.</p>
+                </div>
+                <div class="topic-card fade-in-up" data-delay="200">
+                    <h4 class="text-xl font-bold mb-2 text-primary">Desejo e Sexualidade</h4>
+                    <p class="text-gray-600">A redescoberta do corpo e da sexualidade na maturidade.</p>
+                </div>
+                <div class="topic-card fade-in-up" data-delay="300">
+                    <h4 class="text-xl font-bold mb-2 text-primary">O Futuro Solteiro(a)</h4>
+                    <p class="text-gray-600">Envelhecer solteiro: medo ou uma escolha de vida conectada com quem você é?</p>
+                </div>
+                <div class="topic-card fade-in-up" data-delay="400">
+                    <h4 class="text-xl font-bold mb-2 text-primary">Novos Vínculos</h4>
+                    <p class="text-gray-600">Relações não monogâmicas e outros formatos de amar que fazem sentido para você.</p>
+                </div>
+                <div class="topic-card fade-in-up" data-delay="500">
+                    <h4 class="text-xl font-bold mb-2 text-primary">Luto e Recomeço</h4>
+                    <p class="text-gray-600">Superar perdas, decepções e a arte de se reinventar após o luto amoroso.</p>
+                </div>
+                <div class="topic-card fade-in-up" data-delay="600">
+                    <h4 class="text-xl font-bold mb-2 text-primary">Quem sou eu?</h4>
+                    <p class="text-gray-600">Construção de um projeto de vida para além dos relacionamentos.</p>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="text-3xl md:text-5xl font-extrabold text-center mb-12 text-gray-800 fade-in-up">
+                A Segurança de Ser Conduzido por Especialistas
+            </h3>
+            <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-16 fade-in-up" data-delay="100">
+                Mais de <strong class="font-bold highlight-text">40 anos de prática clínica combinada</strong>, com foco na Psicoterapia Relacional Sistêmica.
+            </p>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="flex flex-col md:flex-row items-center bg-fcf8f7 p-6 rounded-xl shadow-lg fade-in-up" data-delay="200">
+                    <img class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-full mb-4 md:mb-0 md:mr-6 flex-shrink-0 border-4 border-primary" 
+                         src="https://i.ibb.co/8gC4Drfh/foto-eliane.jpg" 
+                         alt="Foto Eliane Cromack"
+                         onerror="this.onerror=null; this.src='https://placehold.co/128x128/c05d53/ffffff?text=E'">
+                    <div>
+                        <h4 class="text-2xl font-bold text-primary mb-2">Eliane Cromack</h4>
+                        <p class="font-semibold text-gray-700">Psicóloga Clínica (<strong class="font-bold">+20 anos</strong>) | Sistêmica</p>
+                        <ul class="text-gray-500 text-sm mt-2 list-disc list-inside">
+                            <li>Especialista em Psicologia Relacional Sistêmica.</li>
+                            <li>Sua vivência (viúva aos 39) traz profundidade à temas de luto e recomeço.</li>
+                            <li>Foco no valor dos vínculos e conexões genuínas.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col md:flex-row items-center bg-fcf8f7 p-6 rounded-xl shadow-lg fade-in-up" data-delay="300">
+                    <img class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-full mb-4 md:mb-0 md:mr-6 flex-shrink-0 border-4 border-primary" 
+                         src="https://i.ibb.co/xtpNj47h/foto-barbara.jpg" 
+                         alt="Foto Bárbara Stürmer"
+                         onerror="this.onerror=null; this.src='https://placehold.co/128x128/c05d53/ffffff?text=B'">
+                    <div>
+                        <h4 class="text-2xl font-bold text-primary mb-2">Barbara Stürmer</h4>
+                        <p class="font-semibold text-gray-700">Psicóloga (<strong class="font-bold">+20 anos</strong>) | Especialista em Família</p>
+                        <ul class="text-gray-500 text-sm mt-2 list-disc list-inside">
+                            <li>Especialista em psicoterapia relacional sistêmica e saúde da família.</li>
+                            <li>Experiência em situações de violência e construção de resiliência.</li>
+                            <li>Visão ampliada: "tudo tem muitos ângulos - depende dos óculos que a gente usa."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16 fade-in-up" data-delay="400">
+                <a href="#cta-bottom" class="btn-cta text-lg">
+                    FALE CONOSCO E GARANTA SUA VAGA <i class="fas fa-handshake ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 color-primary text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-up">
+            <h3 class="text-3xl md:text-4xl font-bold mb-4">
+                Ciência Profunda. Acolhimento Humano.
+            </h3>
+            <p class="text-xl">
+                Aqui, a vulnerabilidade é acolhida e transformada em força coletiva.
+                Você está entrando na <strong class="highlight-text">Nossa Aldeia</strong>, um espaço seguro, ético e mediado por especialistas.
+            </p>
+        </div>
+    </section>
+
+
+    <section class="py-16 md:py-24 bg-fcf8f7">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800 fade-in-up">
+                A Transformação de Quem Já Viveu a Jornada
+            </h3>
+            
+            <div id="testimonial-carousel" class="relative min-h-[300px] flex items-center">
+                
+                <div class="carousel-item active testimonial-card w-full" data-index="0">
+                    <i class="fas fa-quote-left text-primary text-2xl mb-4 opacity-70"></i>
+                    <p class="text-xl italic text-gray-700 mb-6">
+                        "Participar do Encontro De Solteiros foi a decisão mais importante dos meus 40 anos. Eu estava em um ciclo vicioso de repetição e solidão. O olhar sistêmico da Eliane e da Bárbara, junto com a escuta do grupo, me deu a coragem e a consciência para, pela primeira vez, construir uma relação honesta comigo mesma. Saí do piloto automático."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-primary rounded-full mr-4 flex-shrink-0">
+                            <img class="w-10 h-10 rounded-full object-cover" src="https://placehold.co/40x40/c05d53/ffffff?text=C" alt="Cliente Carolina">
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-900">Carolina M. (42), Florianópolis</p>
+                            <p class="text-sm text-gray-500">Participante da 1ª Turma Online</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item testimonial-card w-full" data-index="1">
+                    <i class="fas fa-quote-left text-primary text-2xl mb-4 opacity-70"></i>
+                    <p class="text-xl italic text-gray-700 mb-6">
+                        "Aos 45, achei que já tinha vivido tudo sobre a solteirice, mas o grupo me mostrou que eu estava apenas sobrevivendo, não vivendo. As discussões sobre desejo e o futuro me deram uma clareza imensa. É um grupo seguro, sem pressão, mas com a ciência e o acolhimento que só a Eliane e a Bárbara conseguem oferecer."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-primary rounded-full mr-4 flex-shrink-0">
+                            <img class="w-10 h-10 rounded-full object-cover" src="https://placehold.co/40x40/c05d53/ffffff?text=R" alt="Cliente Ricardo">
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-900">Ricardo F. (45), São Paulo</p>
+                            <p class="text-sm text-gray-500">Participante da 2ª Turma Presencial</p>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="carousel-item testimonial-card w-full" data-index="2">
+                    <i class="fas fa-quote-left text-primary text-2xl mb-4 opacity-70"></i>
+                    <p class="text-xl italic text-gray-700 mb-6">
+                        "Eu estava há anos repetindo os mesmos erros em relacionamentos, sem entender a raiz disso. O olhar sistêmico do grupo, com a mediação impecável, me fez enxergar os padrões familiares que eu trazia. Foi libertador! Hoje eu me sinto forte e autônoma, pronta para o que vier."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-primary rounded-full mr-4 flex-shrink-0">
+                            <img class="w-10 h-10 rounded-full object-cover" src="https://placehold.co/40x40/c05d53/ffffff?text=J" alt="Cliente Juliana">
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-900">Juliana S. (38), Rio de Janeiro</p>
+                            <p class="text-sm text-gray-500">Participante da 3ª Turma Online</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-0 left-0 right-0 flex justify-center space-x-2 mt-6 pb-2">
+                    <button class="dot w-3 h-3 bg-primary rounded-full opacity-50 hover:opacity-100 transition-opacity duration-300" onclick="showTestimonial(0)"></button>
+                    <button class="dot w-3 h-3 bg-primary rounded-full opacity-50 hover:opacity-100 transition-opacity duration-300" onclick="showTestimonial(1)"></button>
+                    <button class="dot w-3 h-3 bg-primary rounded-full opacity-50 hover:opacity-100 transition-opacity duration-300" onclick="showTestimonial(2)"></button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 color-primary text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <i class="fas fa-quote-left text-5xl mb-6 opacity-80 fade-in-up"></i>
+            <p class="text-2xl md:text-3xl font-light italic mb-8 fade-in-up" data-delay="100">
+                "Este grupo não é sobre encontrar alguém. É sobre <span class="highlight-text">me reencontrar</span>. É sobre sair do piloto automático das expectativas e, finalmente, construir um projeto de vida conectado com o que eu <span class="highlight-text">desejo de verdade</span>."
+            </p>
+            <p class="text-lg font-semibold fade-in-up" data-delay="200">
+                — Ex-Participante Anônima (48)
+            </p>
+            <div class="text-center mt-12 fade-in-up" data-delay="300">
+                <a href="#cta-bottom" class="btn-cta text-xl px-6 py-3">
+                    Estou Pronta(o) para Me Reencontrar!
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 footer-cta" id="cta-bottom">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            
+            <h3 class="text-3xl md:text-5xl font-extrabold mb-4 text-white fade-in-up">
+                Um Investimento no Vínculo Mais Importante: <span class="highlight-text">O Seu</span>
+            </h3>
+            <p class="text-lg mb-8 text-gray-200 max-w-3xl mx-auto fade-in-up" data-delay="100">
+                Seu passo para dentro, com coragem e afeto.
+            </p>
+
+            <div class="bg-white text-gray-800 p-8 rounded-xl shadow-2xl inline-block mb-10 fade-in-up" data-delay="200">
+                <p class="text-xl font-semibold">
+                    Ciclo de 10 Encontros (Mensais)
+                </p>
+                <p class="text-4xl md:text-5xl font-extrabold mt-2 text-primary">
+                    R$ 250,00<span class="text-lg font-light text-gray-700"> / mês</span>
+                </p>
+                <p class="text-sm text-gray-500 mt-2">
+                    *Vagas Limitadas. Total de 10 meses.
+                </p>
+            </div>
+
+            <div class="fade-in-up" data-delay="300">
+                <a href="javascript:void(0);" onclick="showModal()" class="btn-cta text-2xl px-8 py-4">
+                    QUERO GARANTIR MINHA VAGA AGORA <i class="fas fa-calendar-check ml-3"></i>
+                </a>
+            </div>
+            <p class="text-lg font-bold text-white mt-6 fade-in-up" data-delay="400">
+                ATENÇÃO: <span class="highlight-text">ÚLTIMAS VAGAS</span> - Não perca a chance de participar da próxima turma!
+            </p>
+            <p class="text-sm text-gray-400 mt-2">Fale com a gente para saber mais sobre as datas e a próxima turma.</p>
+
+        </div>
+    </section>
+
+    <footer class="py-8 bg-black text-gray-400 text-center text-sm">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>&copy; 2025 Nossa Aldeia - Psicoterapia em Rede. Conectar para Cuidar.</p>
+            <p class="mt-1">Desenvolvido por Henry Cromack.</p>
+        </div>
+    </footer>
+    
+    <div id="cta-modal" class="fixed inset-0 bg-black bg-opacity-75 hidden items-center justify-center z-[100]">
+        <div class="bg-white p-8 rounded-xl max-w-md mx-4 shadow-2xl transform scale-95 transition-transform duration-300">
+            <h4 class="text-2xl font-bold text-primary mb-4">Parabéns pela Sua Escolha!</h4>
+            <p class="text-gray-700 mb-6">
+                Você está a um passo de transformar sua vida relacional. Para garantir sua vaga no <strong class="font-bold">Encontro De Solteiros 35+</strong> e receber as informações de pagamento e cronograma, por favor, entre em contato via WhatsApp.
+            </p>
+            <a href="javascript:void(0);" onclick="hideModal()" class="btn-cta text-lg block text-center">
+                Entendido! Falar com a Aldeia <i class="fab fa-whatsapp ml-2"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Função para mostrar o Modal
+        function showModal() {
+            const modal = document.getElementById('cta-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            // Animação de entrada
+            setTimeout(() => {
+                modal.querySelector('div').classList.add('scale-100');
+                modal.querySelector('div').classList.remove('scale-95');
+            }, 10);
+        }
+
+        // Função para esconder o Modal
+        function hideModal() {
+            const modal = document.getElementById('cta-modal');
+            // Animação de saída
+            modal.querySelector('div').classList.remove('scale-100');
+            modal.querySelector('div').classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        }
+
+        // Lógica do Carrossel de Depoimentos
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.carousel-item');
+        const dots = document.querySelectorAll('.dot');
+        const totalTestimonials = testimonials.length;
+        
+        function showTestimonial(index) {
+            testimonials.forEach(t => t.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('opacity-100'));
+            dots.forEach(d => d.classList.add('opacity-50'));
+
+            testimonials[index].classList.add('active');
+            dots[index].classList.add('opacity-100');
+            dots[index].classList.remove('opacity-50');
+            currentTestimonial = index;
+        }
+
+        function nextTestimonial() {
+            let nextIndex = (currentTestimonial + 1) % totalTestimonials;
+            showTestimonial(nextIndex);
+        }
+
+        // Auto-Play do Carrossel a cada 5 segundos
+        setInterval(nextTestimonial, 5000);
+        
+        // Inicializa o primeiro depoimento
+        showTestimonial(0);
+
+
+        // Observador de Interseção para Animações ao Descer a Página (Fade-in-up)
+        document.addEventListener("DOMContentLoaded", function() {
+            const elements = document.querySelectorAll('.fade-in-up');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delay = parseInt(entry.target.getAttribute('data-delay') || 0);
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target); // Para que a animação ocorra apenas uma vez
+                        }, delay);
+                    }
+                });
+            }, {
+                threshold: 0.1, // Começa a animar quando 10% do elemento está visível
+            });
+
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+
+        // Comportamento da Sticky Navbar (aparece ao rolar)
+        window.onscroll = function() { stickyNav() };
+
+        function stickyNav() {
+            const nav = document.getElementById("sticky-nav");
+            // Certifique-se de que a hero-section existe antes de obter a altura
+            const heroSection = document.querySelector('.hero-section');
+            if (!heroSection) return;
+            
+            const heroHeight = heroSection.offsetHeight;
+            
+            if (window.scrollY > heroHeight * 0.5) { // Aparece depois de rolar metade do hero
+                nav.classList.remove('-translate-y-full');
+            } else {
+                nav.classList.add('-translate-y-full');
+            }
+        }
+    </script>
+</body>
+</html>
