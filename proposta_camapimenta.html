@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposta Estratégica | Cama Pimenta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #fdfdfd;
+            color: #1a1a1a;
+            overflow: hidden;
+        }
+        .title-font {
+            font-family: 'Playfair Display', serif;
+        }
+        .slide {
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            pointer-events: none;
+        }
+        .slide.active {
+            opacity: 1;
+            z-index: 2;
+            pointer-events: auto;
+        }
+        .nav-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            color: #1a1a1a;
+            padding: 1rem;
+            border-radius: 50%;
+            transition: all 0.3s;
+            border: 1px solid rgba(26, 26, 26, 0.05);
+        }
+        .nav-arrow:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        #prev { left: 2rem; }
+        #next { right: 2rem; }
+        
+        .slide-counter {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            font-size: 0.8rem;
+            color: #666;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            letter-spacing: 2px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* height: 50px; Removida altura fixa para permitir variação */
+            gap: 2rem;
+        }
+
+        .logo-img {
+            height: 50px; /* Altura base para a Logo 1 */
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .logo-pimenta {
+            height: 70px; /* Logo 2 aumentada */
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+        
+        .content-box {
+            max-width: 1100px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        /* Confetti */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .big-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            line-height: 1;
+            opacity: 0.2;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Slide 1: Capa -->
+    <div class="slide active">
+        <div class="flex flex-col items-center justify-center animate-fade-in-up">
+            <div class="logo-container mb-12 opacity-90">
+                <img src="https://i.postimg.cc/02VXH4Xg/logo-black.png" alt="Sua Logo" class="logo-img">
+                <span class="title-font text-3xl font-light text-gray-300 mx-4">|</span>
+                <img src="https://i.ibb.co/mVYMK579/472edd-1c7faadffd914c39b260a934213d41b5-mv2-Editado.png" alt="Cama Pimenta" class="logo-pimenta">
+            </div>
+            <p class="font-light tracking-[0.3em] uppercase text-sm mb-6 text-gray-500">Proposta de Consultoria Estratégica</p>
+            <h1 class="title-font text-5xl md:text-7xl font-normal mb-6 max-w-5xl mx-auto leading-tight text-gray-900">
+                Arquitetura de <br>Lançamento Digital
+            </h1>
+            <p class="text-xl font-light text-gray-600 mt-4 max-w-2xl">Transformando um e-commerce em uma experiência de Wellness.</p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Contexto -->
+    <div class="slide bg-gray-50">
+        <div class="content-box text-left">
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                <div class="md:w-1/2">
+                    <p class="font-light tracking-widest uppercase text-gray-400 mb-2 text-xs">O Cenário Atual</p>
+                    <h2 class="title-font text-4xl mb-6">O Paradoxo do Varejo</h2>
+                    <p class="font-light text-lg text-gray-600 mb-4 leading-relaxed">
+                        A Cama Pimenta possui um mix de produtos de <strong>luxo e bem-estar</strong>, mas o e-commerce novo corre o risco de operar com táticas de varejo de massa.
+                    </p>
+                    <p class="font-light text-lg text-gray-600 leading-relaxed">
+                        Isso gera caixa no curto prazo, mas não constrói a marca. Precisamos de uma estratégia que venda volume sem sacrificar a aura Premium dos acessórios.
+                    </p>
+                </div>
+                <div class="md:w-1/2 bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+                    <h3 class="title-font text-2xl mb-6">Nossa Missão Imediata</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-6 h-6 text-gray-800 mt-1"></i>
+                            <span class="font-light text-gray-700">Lançar o e-commerce com foco total em <strong>Caixa e Conversão</strong>.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-6 h-6 text-gray-800 mt-1"></i>
+                            <span class="font-light text-gray-700">Estruturar a "Casa Digital" (CRM, Automação, Dados).</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-6 h-6 text-gray-800 mt-1"></i>
+                            <span class="font-light text-gray-700">Preparar o terreno para o futuro Reposicionamento.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Visão de Impacto -->
+    <div class="slide bg-[#111] text-white">
+        <div class="max-w-4xl mx-auto relative z-10 flex flex-col items-center">
+            <span class="big-quote text-white mb-[-40px]">“</span>
+            <h1 class="title-font text-4xl md:text-5xl leading-tight mb-8 text-center italic font-light">
+                Não vendemos apenas acessórios.<br>
+                Vendemos <span class="text-gray-300 font-normal not-italic">rituais de relaxamento</span> <br> e a base do bem-estar.
+            </h1>
+            <div class="w-24 h-px bg-white mx-auto opacity-30 rounded-full"></div>
+            <p class="mt-8 font-light text-gray-400 text-lg">Essa é a virada de chave para sair da guerra de preços.</p>
+        </div>
+    </div>
+
+    <!-- Slide 4: Metodologia em 3 Atos -->
+    <div class="slide">
+        <div class="content-box">
+            <h2 class="title-font text-4xl mb-12">A Jornada de Transformação</h2>
+            <div class="grid md:grid-cols-3 gap-6 text-left">
+                <!-- Fase 1 -->
+                <div class="p-6 rounded-xl bg-gray-900 text-white shadow-xl transform scale-105 border-2 border-gray-800 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10"><i data-lucide="rocket" class="w-24 h-24"></i></div>
+                    <span class="text-xs font-bold tracking-widest uppercase bg-white text-black px-2 py-1 rounded mb-4 inline-block">Foco Atual</span>
+                    <h3 class="title-font text-2xl mb-2">1. Lançamento & Estrutura</h3>
+                    <p class="text-sm text-gray-400 mb-4">O "Awakening" Digital</p>
+                    <hr class="border-gray-700 mb-4">
+                    <ul class="text-sm font-light space-y-2 text-gray-300">
+                        <li>• Setup de E-commerce</li>
+                        <li>• Automação de E-mail (CRM)</li>
+                        <li>• <strong>Estratégia 360º do Lançamento</strong></li>
+                        <li>• <strong>Gerenciamento de Pontas</strong></li>
+                    </ul>
+                </div>
+
+                <!-- Fase 2 -->
+                <div class="p-6 rounded-xl bg-white border border-gray-200 opacity-60 hover:opacity-100 transition-opacity">
+                    <h3 class="title-font text-2xl mb-2 text-gray-800">2. Reposicionamento</h3>
+                    <p class="text-sm text-gray-500 mb-4">A Alma da Marca</p>
+                    <hr class="border-gray-100 mb-4">
+                    <ul class="text-sm font-light space-y-2 text-gray-600">
+                        <li>• Brandbook & Tom de Voz</li>
+                        <li>• Estratégia Wellness</li>
+                        <li>• Produção de Conteúdo Premium</li>
+                        <li>• Foco em Valor Percebido</li>
+                    </ul>
+                </div>
+
+                <!-- Fase 3 -->
+                <div class="p-6 rounded-xl bg-white border border-gray-200 opacity-60 hover:opacity-100 transition-opacity">
+                    <h3 class="title-font text-2xl mb-2 text-gray-800">3. Gestão & Growth</h3>
+                    <p class="text-sm text-gray-500 mb-4">A Manutenção</p>
+                    <hr class="border-gray-100 mb-4">
+                    <ul class="text-sm font-light space-y-2 text-gray-600">
+                        <li>• Otimização de CAC e LTV</li>
+                        <li>• Gestão de Performance</li>
+                        <li>• Consultoria Recorrente</li>
+                        <li>• Escala Sustentável</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Detalhamento Cronograma -->
+    <div class="slide bg-gray-50">
+        <div class="content-box">
+            <div class="flex justify-between items-end mb-8">
+                <div class="text-left">
+                    <h2 class="title-font text-4xl mb-2">Fase 1: A Construção do Ativo</h2>
+                    <p class="font-light text-gray-600">6 Semanas de Preparação Técnica e Estratégica antes da venda.</p>
+                </div>
+                <div class="text-right">
+                    <span class="block text-3xl font-bold title-font text-gray-200">6 SEMANAS</span>
+                </div>
+            </div>
+
+            <!-- Timeline Visual -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
+                <div class="bg-white p-5 rounded-lg shadow-sm border-t-4 border-gray-800">
+                    <strong class="block text-gray-400 text-xs uppercase mb-2">Semanas 1-2</strong>
+                    <h4 class="title-font text-lg font-bold mb-2">Diagnóstico & Estratégia</h4>
+                    <p class="text-xs text-gray-500">Imersão com stakeholders, desenho da jornada, cronograma mestre e KPIs.</p>
+                </div>
+                <div class="bg-white p-5 rounded-lg shadow-sm border-t-4 border-gray-600">
+                    <strong class="block text-gray-400 text-xs uppercase mb-2">Semana 3</strong>
+                    <h4 class="title-font text-lg font-bold mb-2">Orquestração</h4>
+                    <p class="text-xs text-gray-500">Briefing para Agência (Tráfego/Social) e Desenvolvedores. Definição criativa.</p>
+                </div>
+                <div class="bg-white p-5 rounded-lg shadow-sm border-t-4 border-gray-800">
+                    <strong class="block text-gray-400 text-xs uppercase mb-2">Semanas 4-5</strong>
+                    <h4 class="title-font text-lg font-bold mb-2">Inteligência (CRM)</h4>
+                    <p class="text-xs text-gray-500">Setup de e-mail marketing, criação dos fluxos (boas-vindas, carrinho) e automações.</p>
+                </div>
+                <div class="bg-white p-5 rounded-lg shadow-sm border-t-4 border-gray-600">
+                    <strong class="block text-gray-400 text-xs uppercase mb-2">Semana 6</strong>
+                    <h4 class="title-font text-lg font-bold mb-2">Go-Live & Testes</h4>
+                    <p class="text-xs text-gray-500">Testes de stress no site, validação de checkout, setup de dashboard e start.</p>
+                </div>
+            </div>
+            
+            <p class="mt-8 text-sm italic text-gray-500 text-left border-l-2 border-gray-300 pl-4">
+                "O objetivo é garantir que a casa esteja arrumada. Se lançarmos sem essa base (fluxos de e-mail, rastreamento), queimaremos dinheiro de mídia."
+            </p>
+        </div>
+    </div>
+
+    <!-- SEÇÃO DE ENTREGÁVEIS DETALHADA -->
+
+    <!-- Slide 6: Entregável 1 -->
+    <div class="slide">
+        <div class="content-box flex flex-col md:flex-row gap-12 items-center text-left">
+            <div class="md:w-1/2">
+                <span class="text-xs font-bold tracking-widest uppercase text-gray-400 mb-2 block">Entregável 01</span>
+                <h2 class="title-font text-5xl mb-6 leading-tight">Estratégia 360º &<br>Go-to-Market</h2>
+                <div class="w-16 h-1 bg-gray-900 mb-6"></div>
+                <p class="font-light text-gray-600 mb-6 text-lg">
+                    Não é apenas um calendário de posts. É o desenho completo da arquitetura de vendas que conecta todos os pontos de contato do cliente.
+                </p>
+            </div>
+            <div class="md:w-1/2 bg-gray-50 p-8 rounded-xl border border-gray-100 shadow-lg">
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-4">
+                        <div class="bg-white p-2 rounded-full shadow-sm"><i data-lucide="map" class="w-5 h-5 text-gray-800"></i></div>
+                        <div>
+                            <strong class="block text-gray-900">Jornada de Compra (22 Dias)</strong>
+                            <span class="text-sm font-light text-gray-600">Fases de Construção, Aquecimento e Conversão.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <div class="bg-white p-2 rounded-full shadow-sm"><i data-lucide="layers" class="w-5 h-5 text-gray-800"></i></div>
+                        <div>
+                            <strong class="block text-gray-900">Mix de Produtos e Ofertas</strong>
+                            <span class="text-sm font-light text-gray-600">Definição estratégica do que vender, quando e por quanto.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <div class="bg-white p-2 rounded-full shadow-sm"><i data-lucide="share-2" class="w-5 h-5 text-gray-800"></i></div>
+                        <div>
+                            <strong class="block text-gray-900">Gerenciamento de Pontas</strong>
+                            <span class="text-sm font-light text-gray-600">Coordenação unificada entre Tráfego, Social, Dev e Logística.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Entregável 2 -->
+    <div class="slide bg-gray-50">
+        <div class="content-box flex flex-col md:flex-row gap-12 items-center text-left">
+            <div class="md:w-1/2 order-2 md:order-1 bg-white p-8 rounded-xl border border-gray-100 shadow-lg">
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-4">
+                        <div class="bg-gray-50 p-2 rounded-full shadow-sm"><i data-lucide="settings" class="w-5 h-5 text-gray-800"></i></div>
+                        <div>
+                            <strong class="block text-gray-900">Setup Técnico Avançado</strong>
+                            <span class="text-sm font-light text-gray-600">Configuração de DNS, SPF e entregabilidade para não cair no SPAM.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <div class="bg-gray-50 p-2 rounded-full shadow-sm"><i data-lucide="message-square" class="w-5 h-5 text-gray-800"></i></div>
+                        <div>
+                            <strong class="block text-gray-900">Fluxos de Nutrição (Boas-vindas)</strong>
+                            <span class="text-sm font-light text-gray-600">Storytelling automático que educa o cliente sobre wellness.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <div class="bg-gray-50 p-2 rounded-full shadow-sm"><i data-lucide="repeat" class="w-5 h-5 text-gray-800"></i></div>
+                        <div>
+                            <strong class="block text-gray-900">Recuperação de Vendas</strong>
+                            <span class="text-sm font-light text-gray-600">Automação de Carrinho Abandonado focada em conversão agressiva.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="md:w-1/2 order-1 md:order-2">
+                <span class="text-xs font-bold tracking-widest uppercase text-gray-400 mb-2 block">Entregável 02</span>
+                <h2 class="title-font text-5xl mb-6 leading-tight">Engenharia de CRM<br>& Automação</h2>
+                <div class="w-16 h-1 bg-gray-900 mb-6"></div>
+                <p class="font-light text-gray-600 mb-6 text-lg">
+                    Construção da "Máquina de Vendas Perpétua". O sistema que continua vendendo para vocês 24/7, mesmo após o lançamento.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Entregável 3 (NOVO SLIDE DEDICADO) -->
+    <div class="slide">
+        <div class="content-box flex flex-col md:flex-row gap-12 items-center text-left">
+            <div class="md:w-1/2">
+                <span class="text-xs font-bold tracking-widest uppercase text-gray-400 mb-2 block">Entregável 03</span>
+                <h2 class="title-font text-5xl mb-6 leading-tight">Direção Criativa &<br>Gestão de Coerência</h2>
+                <div class="w-16 h-1 bg-gray-900 mb-6"></div>
+                <p class="font-light text-gray-600 mb-6 text-lg">
+                   Muito além de aprovar layouts. É garantir que a visão "Wellness" permeie cada pixel e palavra, coordenando múltiplos fornecedores.
+                </p>
+            </div>
+            <div class="md:w-1/2 bg-white p-8 rounded-xl border border-gray-100 shadow-lg">
+                <ul class="space-y-6">
+                    <li class="flex items-start gap-4">
+                        <div class="bg-gray-50 p-2 rounded-full shadow-sm"><i data-lucide="eye" class="w-5 h-5 text-gray-800"></i></div>
+                        <div>
+                            <strong class="block text-gray-900">Curadoria & Referências</strong>
+                            <span class="text-sm font-light text-gray-600">Pesquisa de mercado e benchmarking para elevar o padrão estético da marca.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <div class="bg-gray-50 p-2 rounded-full shadow-sm"><i data-lucide="git-merge" class="w-5 h-5 text-gray-800"></i></div>
+                        <div>
+                            <strong class="block text-gray-900">Gestão de Stakeholders</strong>
+                            <span class="text-sm font-light text-gray-600">Unificação da linguagem entre Tráfego, Social Media e Desenvolvedores. Todos remando na mesma direção.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <div class="bg-gray-50 p-2 rounded-full shadow-sm"><i data-lucide="shield-check" class="w-5 h-5 text-gray-800"></i></div>
+                        <div>
+                            <strong class="block text-gray-900">Controle de Qualidade (QA)</strong>
+                            <span class="text-sm font-light text-gray-600">Garantia que a execução técnica não descaracterize a estratégia de luxo.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Entregável 4 (NOVO SLIDE DEDICADO) -->
+    <div class="slide bg-gray-50">
+        <div class="content-box flex flex-col md:flex-row gap-12 items-center text-left">
+            <div class="md:w-1/2 order-2 md:order-1 bg-white p-8 rounded-xl border border-gray-100 shadow-lg">
+                <ul class="space-y-6">
+                    <li class="flex items-start gap-4">
+                        <div class="bg-gray-50 p-2 rounded-full shadow-sm"><i data-lucide="database" class="w-5 h-5 text-gray-800"></i></div>
+                        <div>
+                            <strong class="block text-gray-900">Engenharia de Dados</strong>
+                            <span class="text-sm font-light text-gray-600">População, limpeza e tratamento dos dados. Transformar caos em informação legível.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <div class="bg-gray-50 p-2 rounded-full shadow-sm"><i data-lucide="file-check" class="w-5 h-5 text-gray-800"></i></div>
+                        <div>
+                            <strong class="block text-gray-900">Governança & Rituais</strong>
+                            <span class="text-sm font-light text-gray-600">Estabelecimento de rotinas de análise. Não apenas coletar dados, mas saber quando olhá-los.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <div class="bg-gray-50 p-2 rounded-full shadow-sm"><i data-lucide="trending-up" class="w-5 h-5 text-gray-800"></i></div>
+                        <div>
+                            <strong class="block text-gray-900">Análise Acionável</strong>
+                            <span class="text-sm font-light text-gray-600">Entrega de diagnósticos com <strong>planos de ação factíveis</strong>, não apenas relatórios passivos.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="md:w-1/2 order-1 md:order-2">
+                <span class="text-xs font-bold tracking-widest uppercase text-gray-400 mb-2 block">Entregável 04</span>
+                <h2 class="title-font text-5xl mb-6 leading-tight">Business Intelligence<br>& Governança</h2>
+                <div class="w-16 h-1 bg-gray-900 mb-6"></div>
+                <p class="font-light text-gray-600 mb-6 text-lg">
+                    Dados sem tratamento são apenas ruído. Estruturaremos a inteligência necessária para decisões de alto impacto.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Slide 10: Cronograma Campanha -->
+    <div class="slide bg-gray-900 text-white">
+        <div class="content-box bg-opacity-10 backdrop-blur-none bg-transparent border-gray-800 text-left">
+            <h2 class="title-font text-4xl mb-2">Fase de Ação: Campanha "Awakening"</h2>
+            <p class="font-light text-gray-400 mb-12">22 Dias de Gestão Intensiva e Performance.</p>
+
+            <div class="relative pl-8 border-l border-gray-700 space-y-12">
+                <!-- Etapa 1 -->
+                <div class="relative">
+                    <div class="absolute -left-[41px] top-0 w-5 h-5 bg-gray-900 border-4 border-gray-500 rounded-full"></div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-gray-500 mb-1 block">Dias 1-10</span>
+                    <h3 class="title-font text-2xl mb-2">Construção (Awareness)</h3>
+                    <p class="text-sm font-light text-gray-400 max-w-lg">Atrair novos olhares para o conceito de "Sono Wellness". Monitoramento de tráfego frio e custo por lead.</p>
+                </div>
+
+                <!-- Etapa 2 -->
+                <div class="relative">
+                    <div class="absolute -left-[41px] top-0 w-5 h-5 bg-gray-900 border-4 border-white rounded-full"></div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-white mb-1 block">Dias 11-15</span>
+                    <h3 class="title-font text-2xl mb-2">Aquecimento & Antecipação</h3>
+                    <p class="text-sm font-light text-gray-400 max-w-lg">Captura de leads VIP. Revelação do mix de produtos. A hora de gerar desejo represado.</p>
+                </div>
+
+                <!-- Etapa 3 -->
+                <div class="relative">
+                    <div class="absolute -left-[41px] top-0 w-5 h-5 bg-gray-200 border-4 border-white rounded-full shadow-[0_0_15px_rgba(255,255,255,0.5)]"></div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-white mb-1 block">Dias 16-22</span>
+                    <h3 class="title-font text-3xl mb-2 text-white">Lançamento & Conversão</h3>
+                    <p class="text-sm font-light text-gray-400 max-w-lg">Abertura de carrinho. Gestão de crise em tempo real. Recuperação agressiva de vendas.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11: Investimento e Valor -->
+    <div class="slide">
+        <div class="content-box">
+            <div class="text-center mb-10">
+                <h2 class="title-font text-4xl md:text-5xl mb-4">Investimento do Projeto</h2>
+                <p class="font-light text-gray-600">E-Commerce Launch Leader & Strategist</p>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-6 justify-center items-stretch max-w-4xl mx-auto">
+                <!-- Box Valor -->
+                <div class="bg-[#1a1a1a] text-white p-10 rounded-xl flex-1 flex flex-col justify-center items-center shadow-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-white opacity-5 rounded-full blur-2xl transform translate-x-10 -translate-y-10"></div>
+                    
+                    <span class="text-xs uppercase tracking-widest mb-4 opacity-70">Honorários Fixos (Setup + Gestão)</span>
+                    
+                    <div class="text-center mb-2">
+                         <h3 class="title-font text-5xl md:text-6xl mb-2">3x R$ 4.373</h3>
+                         <span class="text-sm font-light opacity-60 block">ou R$ 13.120 à vista</span>
+                    </div>
+
+                    
+                    <div class="w-full h-px bg-gray-700 my-8"></div>
+                    
+                    <span class="text-xs uppercase tracking-widest mb-2 opacity-70 text-yellow-500 font-bold">Success Fee (Parceria)</span>
+                    <div class="text-center">
+                         <span class="text-3xl font-serif">20%</span>
+                         <span class="text-sm font-light block opacity-80 mt-1">do faturamento do E-commerce</span>
+                         <span class="text-xs font-light block opacity-60 mt-1">(Nos primeiros 2 meses após o lançamento do e-commerce)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 12: CTA -->
+    <div class="slide bg-gray-50">
+        <div class="content-box text-center p-12">
+            <h2 class="title-font text-4xl md:text-5xl mb-6">Próximos Passos</h2>
+            <div class="flex flex-col md:flex-row justify-center gap-8 mb-12 text-left max-w-2xl mx-auto">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-serif font-bold text-gray-600">1</div>
+                    <p class="font-light">Aprovação da Proposta</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-serif font-bold text-gray-600">2</div>
+                    <p class="font-light">Reunião de Kick-off (D+2)</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-serif font-bold text-gray-600">3</div>
+                    <p class="font-light">Início do Diagnóstico</p>
+                </div>
+            </div>
+
+            <p class="text-xl font-serif text-gray-800 italic mb-8">"Vamos construir o sono perfeito?"</p>
+
+            <a id="approve-button" href="#" class="bg-[#1a1a1a] text-white title-font text-xl py-4 px-12 rounded-full inline-block transition hover:bg-[#333333] hover:scale-105 shadow-xl">
+                Iniciar Projeto
+            </a>
+        </div>
+    </div>
+
+    <!-- Slide 13: Final -->
+    <div class="slide bg-white">
+        <div class="flex flex-col items-center justify-center animate-fade-in">
+             <div class="logo-container mb-12 opacity-80">
+                <img src="https://i.postimg.cc/02VXH4Xg/logo-black.png" alt="Sua Logo" class="logo-img">
+                <span class="title-font text-3xl font-light text-gray-300 mx-4">|</span>
+                <img src="https://i.ibb.co/mVYMK579/472edd-1c7faadffd914c39b260a934213d41b5-mv2-Editado.png" alt="Cama Pimenta" class="logo-pimenta">
+            </div>
+            <h1 class="title-font text-6xl font-semibold mb-4 text-gray-900">Obrigado</h1>
+        </div>
+    </div>
+
+    <!-- Controles -->
+    <div id="prev" class="nav-arrow"><i data-lucide="chevron-left"></i></div>
+    <div id="next" class="nav-arrow"><i data-lucide="chevron-right"></i></div>
+    <div id="slide-counter" class="slide-counter"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+
+            const slides = document.querySelectorAll('.slide');
+            const prevButton = document.getElementById('prev');
+            const nextButton = document.getElementById('next');
+            const counterElement = document.getElementById('slide-counter');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+                currentSlide = index;
+                updateCounter();
+                updateNavButtons();
+            }
+
+            function updateCounter() {
+                counterElement.textContent = `${currentSlide + 1} / ${totalSlides}`;
+            }
+
+            function updateNavButtons() {
+                prevButton.style.display = currentSlide === 0 ? 'none' : 'block';
+                nextButton.style.display = currentSlide === totalSlides - 1 ? 'none' : 'block';
+                
+                // Ajuste de cor para slides escuros
+                const currentSlideElement = slides[currentSlide];
+                const isDark = currentSlideElement.classList.contains('bg-[#111]') || currentSlideElement.classList.contains('bg-gray-900');
+                
+                if (isDark) {
+                    prevButton.style.color = 'white';
+                    nextButton.style.color = 'white';
+                    counterElement.style.backgroundColor = 'rgba(0,0,0,0.5)';
+                    counterElement.style.color = 'white';
+                } else {
+                    prevButton.style.color = '#1a1a1a';
+                    nextButton.style.color = '#1a1a1a';
+                    counterElement.style.backgroundColor = 'rgba(255,255,255,0.8)';
+                    counterElement.style.color = '#666';
+                }
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides - 1) showSlide(currentSlide + 1);
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) showSlide(currentSlide - 1);
+            }
+
+            prevButton.addEventListener('click', prevSlide);
+            nextButton.addEventListener('click', nextSlide);
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+                else if (e.key === 'ArrowLeft') prevSlide();
+            });
+
+            showSlide(currentSlide);
+
+            // Confetti
+            const approveButton = document.getElementById('approve-button');
+            const confettiCanvas = document.getElementById('confetti-canvas');
+            const ctx = confettiCanvas.getContext('2d');
+            let confettiParticles = [];
+            let animationFrameId = null;
+
+            const stopConfetti = () => {
+                if (animationFrameId) {
+                    cancelAnimationFrame(animationFrameId);
+                    animationFrameId = null;
+                    setTimeout(() => ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height), 100);
+                }
+            };
+
+            const triggerConfetti = () => {
+                stopConfetti();
+                confettiCanvas.width = window.innerWidth;
+                confettiCanvas.height = window.innerHeight;
+                confettiParticles = [];
+                const colors = ['#1a1a1a', '#9f1239', '#e5e7eb']; // Preto, Vermelho Pimenta, Cinza
+                
+                for (let i = 0; i < 150; i++) {
+                    confettiParticles.push({
+                        x: Math.random() * confettiCanvas.width,
+                        y: -Math.random() * confettiCanvas.height,
+                        size: Math.random() * 8 + 4,
+                        speed: Math.random() * 3 + 2,
+                        angle: Math.random() * 360,
+                        tilt: Math.random() * 10 - 5,
+                        tiltAngle: 0,
+                        tiltAngleSpeed: Math.random() * 0.1 + 0.05,
+                        color: colors[Math.floor(Math.random() * colors.length)]
+                    });
+                }
+                animateConfetti();
+                setTimeout(() => {
+                    stopConfetti();
+                    showSlide(totalSlides - 1);
+                }, 2500);
+            };
+
+            const animateConfetti = () => {
+                ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+                confettiParticles.forEach(p => {
+                    ctx.save();
+                    ctx.fillStyle = p.color;
+                    ctx.translate(p.x + p.size / 2, p.y + p.size / 2);
+                    ctx.rotate(p.angle * Math.PI / 180);
+                    ctx.scale(1, Math.cos(p.tiltAngle));
+                    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                    ctx.restore();
+                    p.y += p.speed;
+                    p.angle += p.tilt;
+                    p.tiltAngle += p.tiltAngleSpeed;
+                    if (p.y > confettiCanvas.height) {
+                        p.x = Math.random() * confettiCanvas.width;
+                        p.y = -p.size;
+                    }
+                });
+                animationFrameId = requestAnimationFrame(animateConfetti);
+            };
+
+            approveButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                triggerConfetti();
+            });
+        });
+    </script>
+</body>
+</html>
