@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposta de Gestão 2026 - Polidoro Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #fdfdfd;
+            color: #1a1a1a;
+            overflow: hidden; /* Prevent body scroll */
+        }
+        .title-font {
+            font-family: 'Playfair Display', serif;
+        }
+        .slide {
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+        }
+        .slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+        .nav-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #1a1a1a;
+            padding: 0.75rem;
+            border-radius: 50%;
+            transition: all 0.3s;
+            border: 1px solid rgba(26, 26, 26, 0.1);
+        }
+        .nav-arrow:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-50%) scale(1.1);
+        }
+        #prev {
+            left: 2rem;
+        }
+        #next {
+            right: 2rem;
+        }
+        .slide-counter {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            font-size: 0.875rem;
+            color: #888;
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+        }
+        .logo-svg {
+            width: 280px;
+            height: auto;
+        }
+        .content-box {
+            max-width: 900px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 0.5rem;
+        }
+        .text-shadow {
+             text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        /* Estilo para o preço riscado */
+        .strike-price {
+            position: relative;
+            display: inline-block;
+            color: #d1d5db; /* gray-300 */
+        }
+        .strike-price::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -5%;
+            width: 110%;
+            height: 1px;
+            background: #ef4444; /* red-500 */
+            transform: rotate(-10deg);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Slide 1: Capa -->
+    <div id="slide-1" class="slide active">
+        <div class="flex flex-col items-center justify-center">
+            <img src="https://polidorohome.com.br/wp-content/uploads/2023/12/logopolidorohome.svg" alt="Logo Polidoro Home" class="logo-svg mb-6">
+            <p class="text-xl font-thin tracking-[0.3em] uppercase">GESTÃO ESTRATÉGICA 2026</p>
+            <p class="text-sm font-light mt-4 text-gray-500">Consultoria de Execução & Performance</p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Agenda -->
+    <div id="slide-2" class="slide bg-gray-50">
+        <div class="flex flex-col md:flex-row items-center justify-center gap-12 max-w-5xl mx-auto">
+            <div class="md:w-1/2 text-left">
+                <h1 class="title-font text-4xl md:text-5xl mb-8">Agenda</h1>
+                <ul class="font-light text-xl space-y-4">
+                    <li class="flex items-center gap-3"><span class="font-serif text-2xl text-gray-400">01</span> O Novo Momento</li>
+                    <li class="flex items-center gap-3"><span class="font-serif text-2xl text-gray-400">02</span> Escopo de Trabalho</li>
+                    <li class="flex items-center gap-3"><span class="font-serif text-2xl text-gray-400">03</span> Rotina e Entregáveis</li>
+                    <li class="flex items-center gap-3"><span class="font-serif text-2xl text-gray-400">04</span> Linha do Tempo</li>
+                    <li class="flex items-center gap-3"><span class="font-serif text-2xl text-gray-400">05</span> Investimento e Parceria</li>
+                </ul>
+            </div>
+            <div class="md:w-1/2">
+                 <img src="https://polidorohome.com.br/wp-content/uploads/2024/07/39.jpg.webp" alt="Ambiente Polidoro" class="rounded-lg shadow-2xl h-80 w-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/f9fafb/333333?text=Imagem+Indispon%C3%ADvel';">
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: O Desafio / Contexto -->
+    <div id="slide-3" class="slide">
+        <div class="flex flex-col md:flex-row-reverse items-center justify-center gap-12 max-w-5xl mx-auto">
+            <div class="md:w-1/2 text-left">
+                <h1 class="title-font text-4xl md:text-5xl mb-4">Planejamento feito.<br>Hora de executar.</h1>
+                <p class="font-light leading-relaxed">
+                    A fase de estruturação das informações foi concluída. Agora, entramos em um novo ciclo. 2026 será o ano de tirar os planos do papel, com gestão ativa e acompanhamento "mão na massa".
+                </p>
+            </div>
+            <div class="md:w-1/2">
+                 <img src="https://polidorohome.com.br/wp-content/uploads/2023/12/2343c1d2-c99f-46a6-bf7f-887d87a08035-eas.jpg.webp" alt="Produto Polidoro" class="rounded-lg shadow-2xl h-80 w-full object-cover">
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: A Visão -->
+    <div id="slide-4" class="slide bg-gray-50">
+        <div class="flex flex-col md:flex-row items-center justify-center gap-12 max-w-5xl mx-auto">
+            <div class="md:w-1/2 text-left">
+                <h1 class="title-font text-4xl md:text-5xl mb-4">Mão na massa e estratégia andando juntas.</h1>
+                <p class="font-light leading-relaxed">
+                    Não serei apenas um consultor externo, mas um gestor ativo dos principais projetos da marca, garantindo ritmo, governança e treinamento para o novo membro de marketing.
+                </p>
+            </div>
+            <div class="md:w-1/2">
+                <img src="https://polidorohome.com.br/wp-content/uploads/2023/12/boleira-estrela-polidoro-home-2.jpg.webp" alt="Boleira Estrela" class="rounded-lg shadow-2xl h-80 w-full object-cover">
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Frase de Impacto -->
+    <div id="slide-5" class="slide bg-[#1a1a1a] text-white">
+        <div class="relative z-10">
+            <h1 class="title-font text-4xl md:text-5xl max-w-3xl mx-auto leading-tight">"A melhor estratégia é aquela que sai do papel."</h1>
+        </div>
+    </div>
+
+    <!-- Slide 6: Escopo Detalhado -->
+    <div id="slide-6" class="slide">
+        <div class="max-w-6xl mx-auto w-full">
+            <h1 class="title-font text-4xl md:text-5xl mb-12">Escopo de Trabalho</h1>
+            <div class="grid md:grid-cols-4 gap-6 text-left">
+                
+                <!-- Card 1 -->
+                <div class="bg-white border border-gray-100 p-6 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="text-xs font-bold tracking-widest uppercase text-gray-400 mb-2 block">SETUP</span>
+                    <h3 class="title-font text-xl mb-3">Treinamento</h3>
+                    <p class="font-light text-sm text-gray-600">Ensinar a equipe a montar planos estratégicos e apresentações de marca autônomas.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white border border-gray-100 p-6 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="text-xs font-bold tracking-widest uppercase text-gray-400 mb-2 block">SEMANAL</span>
+                    <h3 class="title-font text-xl mb-3">Rituais</h3>
+                    <p class="font-light text-sm text-gray-600">Reunião fixa de Estratégia Geral (1h30).</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white border border-gray-100 p-6 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="text-xs font-bold tracking-widest uppercase text-gray-400 mb-2 block">GESTÃO</span>
+                    <h3 class="title-font text-xl mb-3">Gestão de Campanhas</h3>
+                    <p class="font-light text-sm text-gray-600">Gestão projetos/campanhas o ano todo. Máximo 2 projetos simultâneos para garantir a qualidade e eficácia. Acompanhamento e backoffice.</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white border border-gray-100 p-6 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="text-xs font-bold tracking-widest uppercase text-gray-400 mb-2 block">DIÁRIO</span>
+                    <h3 class="title-font text-xl mb-3">Suporte</h3>
+                    <p class="font-light text-sm text-gray-600">Disponibilidade ativa no WhatsApp (seg-sex) para destravar dúvidas e agilizar decisões.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Timeline / Resultados -->
+    <div id="slide-7" class="slide bg-gray-50">
+        <div class="flex flex-col items-center justify-center max-w-5xl mx-auto w-full">
+            <h2 class="title-font text-4xl md:text-5xl mb-12">Linha do Tempo 2026</h2>
+            
+            <div class="w-full relative">
+                <!-- Line -->
+                <div class="absolute top-1/2 left-0 w-full h-0.5 bg-gray-300 -translate-y-1/2 hidden md:block"></div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+                    <!-- Phase 1 -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-gray-800">
+                        <span class="block text-2xl font-bold text-gray-200 mb-2">JAN - FEV</span>
+                        <h3 class="text-xl font-serif font-bold mb-2">Setup & Treinamento</h3>
+                        <p class="font-light text-sm">Capacitação do time e início dos rituais de gestão.</p>
+                    </div>
+
+                    <!-- Phase 2 -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-[#C7A77C]">
+                        <span class="block text-2xl font-bold text-gray-200 mb-2">MAR - NOV</span>
+                        <h3 class="text-xl font-serif font-bold mb-2">Gestão Contínua</h3>
+                        <p class="font-light text-sm">Gestão contínua dos Projetos, Campanhas e Estratégia.<br><br><em>*Acompanhamento e análise de dados durante todo o ano.</em></p>
+                    </div>
+
+                    <!-- Phase 3 -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-gray-800">
+                        <span class="block text-2xl font-bold text-gray-200 mb-2">DEZ 2026</span>
+                        <h3 class="text-xl font-serif font-bold mb-2">Consolidação</h3>
+                        <p class="font-light text-sm">Fechamento do ano e análise de resultados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Investimento (Ancoragem) -->
+    <div id="slide-8" class="slide">
+        <div class="max-w-4xl mx-auto w-full">
+            <h1 class="title-font text-4xl md:text-5xl mb-4">Investimento</h1>
+            <p class="font-light mb-12 text-gray-500">Valor de mercado para gestão completa.</p>
+            
+            <div class="bg-white border border-gray-200 p-12 rounded-lg shadow-lg max-w-lg mx-auto transform hover:scale-105 transition duration-500">
+                <p class="text-sm text-gray-500 uppercase tracking-wide mb-2">Valor Integral Mensal</p>
+                <p class="text-6xl title-font font-bold text-gray-800">R$ 8.640,00</p>
+                <p class="text-sm text-gray-400 mt-6">Baseado na complexidade técnica e estratégica de execução.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Investimento (Valor Parceiro) -->
+    <div id="slide-9" class="slide bg-gray-50">
+        <div class="max-w-4xl mx-auto w-full">
+            <h1 class="title-font text-4xl md:text-5xl mb-4">Proposta de Parceria</h1>
+            <p class="font-light mb-12 text-gray-500">Uma condição exclusiva para viabilizar o projeto.</p>
+            
+            <div class="bg-white border-2 border-[#1a1a1a] p-12 rounded-lg shadow-xl max-w-lg mx-auto relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-[#1a1a1a] text-white text-xs font-bold px-3 py-1 uppercase">Oferta Exclusiva</div>
+                
+                <div class="mb-8 opacity-50">
+                    <p class="text-xs text-gray-400 uppercase tracking-wide">De (Valor Integral)</p>
+                    <p class="text-3xl font-light strike-price">R$ 8.640,00</p>
+                </div>
+                
+                <div>
+                    <p class="text-sm text-gray-800 uppercase tracking-wide font-bold mb-2">Para (Valor Parceiro)</p>
+                    <p class="text-6xl title-font font-bold text-gray-900">R$ 3.879,00</p>
+                    <p class="text-lg text-gray-600 font-light">mensais</p>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-gray-100">
+                    <p class="text-xs text-gray-500 leading-relaxed">
+                        + Setup Treinamento (R$ 1.787) diluído em 5x (+ R$ 357,40).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Investimento (Variável) -->
+    <div id="slide-10" class="slide bg-[#1a1a1a] text-white">
+        <div class="max-w-4xl mx-auto w-full">
+            <h1 class="title-font text-4xl md:text-5xl mb-4">Alinhamento de Interesses</h1>
+            <p class="font-light mb-12 text-gray-400">Apostando no crescimento conjunto.</p>
+            
+            <div class="bg-[#2a2a2a] p-12 rounded-lg shadow-2xl max-w-2xl mx-auto border border-white/10 relative">
+                 <div class="absolute -top-4 -right-4 bg-[#C7A77C] w-20 h-20 rounded-full flex items-center justify-center text-black font-bold shadow-lg transform rotate-12 text-sm text-center leading-tight">
+                    Bônus<br>Extra
+                </div>
+
+                <p class="font-thin uppercase tracking-wider text-sm mb-6 text-[#C7A77C]">Condição Especial</p>
+                
+                <div class="flex items-center justify-center gap-4 mb-2">
+                    <span class="text-7xl font-bold text-white">8,5%</span>
+                </div>
+                <p class="title-font text-2xl text-gray-300 mb-8">sobre o Faturamento</p>
+                
+                <div class="mt-8 pt-8 border-t border-white/10">
+                    <p class="text-xl font-light italic text-gray-300 leading-relaxed">
+                        "Eu acredito no potencial da Polidoro Home. E quero fazer com que nosso projeto dê certo da melhor forma para ambos!"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11: Próximos Passos -->
+    <div id="slide-11" class="slide bg-gray-50">
+        <div class="text-center">
+            <h1 class="title-font text-4xl md:text-5xl mb-6">Vamos fazer história em 2026?</h1>
+            <p class="text-lg font-light mb-8 max-w-2xl mx-auto">
+                Ao aprovar a proposta, já agendamos o início dos projetos.
+            </p>
+            
+            <a id="approve-button" href="#" class="bg-[#1a1a1a] text-white title-font text-xl py-4 px-12 rounded-full inline-block transition hover:bg-[#333333] hover:scale-105 no-underline shadow-xl">
+                Aprovar Proposta
+            </a>
+            
+            <div class="mt-12 text-sm text-gray-400">
+                <p>Estou à disposição no WhatsApp para ajustes finais.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegação -->
+    <div id="prev" class="nav-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </div>
+    <div id="next" class="nav-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </div>
+    <div id="slide-counter" class="slide-counter"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Slide Navigation Logic ---
+            const slides = document.querySelectorAll('.slide');
+            const prevButton = document.getElementById('prev');
+            const nextButton = document.getElementById('next');
+            const counterElement = document.getElementById('slide-counter');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+                updateCounter();
+                updateNavButtons();
+            }
+
+            function updateCounter() {
+                counterElement.textContent = `${currentSlide + 1} / ${totalSlides}`;
+            }
+
+            function updateNavButtons() {
+                prevButton.style.display = currentSlide === 0 ? 'none' : 'block';
+                nextButton.style.display = currentSlide === totalSlides - 1 ? 'none' : 'block';
+
+                const currentSlideElement = slides[currentSlide];
+                const hasDarkBg = currentSlideElement.classList.contains('bg-[#1a1a1a]');
+                
+                if (hasDarkBg) {
+                    prevButton.style.color = 'white';
+                    nextButton.style.color = 'white';
+                    prevButton.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                    nextButton.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                } else {
+                    prevButton.style.color = '#1a1a1a';
+                    nextButton.style.color = '#1a1a1a';
+                     prevButton.style.borderColor = 'rgba(26, 26, 26, 0.1)';
+                    nextButton.style.borderColor = 'rgba(26, 26, 26, 0.1)';
+                }
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    showSlide(currentSlide);
+                }
+            }
+
+            prevButton.addEventListener('click', prevSlide);
+            nextButton.addEventListener('click', nextSlide);
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+
+            showSlide(currentSlide);
+
+            // --- Confetti Logic ---
+            const approveButton = document.getElementById('approve-button');
+            const confettiCanvas = document.getElementById('confetti-canvas');
+            const ctx = confettiCanvas.getContext('2d');
+            let confettiParticles = [];
+            let animationFrameId = null;
+
+            const stopConfetti = () => {
+                if (animationFrameId) {
+                    cancelAnimationFrame(animationFrameId);
+                    animationFrameId = null;
+                    setTimeout(() => {
+                          ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+                    }, 100);
+                }
+            };
+
+            const triggerConfetti = () => {
+                stopConfetti(); // Stop any previous animation
+
+                confettiCanvas.width = window.innerWidth;
+                confettiCanvas.height = window.innerHeight;
+                confettiParticles = [];
+                for (let i = 0; i < 150; i++) {
+                    confettiParticles.push({
+                        x: Math.random() * confettiCanvas.width,
+                        y: -Math.random() * confettiCanvas.height,
+                        size: Math.random() * 8 + 4,
+                        speed: Math.random() * 3 + 2,
+                        angle: Math.random() * 360,
+                        tilt: Math.random() * 10 - 5,
+                        tiltAngle: 0,
+                        tiltAngleSpeed: Math.random() * 0.1 + 0.05
+                    });
+                }
+                
+                animateConfetti();
+                
+                // Set a timeout to open the link and then stop
+                setTimeout(() => {
+                    // Update this with your actual WhatsApp link
+                    window.open('https://api.whatsapp.com/send?phone=5511962983098&text=Oi!%20Aprovo%20a%20proposta%20de%20Gest%C3%A3o%202026.%20Podemos%20come%C3%A7ar!', '_blank');
+                    stopConfetti();
+                }, 1500); // 1.5 seconds delay
+            };
+
+            const animateConfetti = () => {
+                ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+                confettiParticles.forEach(p => {
+                    ctx.save();
+                    ctx.fillStyle = '#C7A77C'; // Gold color for confetti
+                    ctx.translate(p.x + p.size / 2, p.y + p.size / 2);
+                    ctx.rotate(p.angle * Math.PI / 180);
+                    ctx.scale(1, Math.cos(p.tiltAngle));
+                    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                    ctx.restore();
+
+                    p.y += p.speed;
+                    p.angle += p.tilt;
+                    p.tiltAngle += p.tiltAngleSpeed;
+
+                    if (p.y > confettiCanvas.height) {
+                        p.x = Math.random() * confettiCanvas.width;
+                        p.y = -p.size;
+                    }
+                });
+                animationFrameId = requestAnimationFrame(animateConfetti);
+            };
+
+            approveButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                triggerConfetti();
+            });
+        });
+    </script>
+</body>
+</html>
