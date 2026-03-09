@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa Aldeia - Um convite para viver vínculos possíveis</title>
+    
+    <!-- Fontes e Ícones -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-green: #6A6B4B;
+            --secondary-green: #8F906A;
+            --light-green: #E8E9E1;
+            --bg-light: #F9F9F7;
+            --text-dark: #333333;
+            --white: #FFFFFF;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #eee;
+            color: var(--text-dark);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Estrutura da Página */
+        .page-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: var(--white);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        /* Elementos Gráficos de Fundo */
+        .blob { position: absolute; background: var(--primary-green); opacity: 0.04; z-index: 0; pointer-events: none; }
+        .blob-1 { top: -80px; right: -120px; width: 500px; height: 500px; border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+        .blob-2 { bottom: 5%; left: -80px; width: 350px; height: 350px; border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+
+        /* CAPA */
+        .cover {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+            background: radial-gradient(circle at top right, #fff 0%, #f4f4f4 100%);
+            z-index: 1;
+        }
+        .cover-frame {
+            border: 2px solid var(--primary-green);
+            padding: 4rem 3rem;
+            position: relative;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(5px);
+        }
+        .cover-logo { max-width: 220px; margin-bottom: 2rem; }
+        .cover h1 { font-size: 3.5rem; color: var(--primary-green); font-weight: 700; line-height: 1.1; margin-bottom: 0.5rem; }
+        .cover h2 { font-size: 1.4rem; font-weight: 300; color: #666; margin-bottom: 2rem; letter-spacing: 2px; text-transform: uppercase; }
+        .decorative-line { width: 80px; height: 4px; background: var(--primary-green); margin: 1rem auto 2rem; }
+
+        /* CONTEÚDO E TIPOGRAFIA */
+        .content-section { padding: 4rem 4rem 2rem; position: relative; z-index: 1; }
+        .chapter-header { position: relative; margin-bottom: 2.5rem; margin-top: 2rem; }
+        .bg-number { position: absolute; top: -55px; left: -20px; font-size: 7rem; font-weight: 700; color: var(--primary-green); opacity: 0.08; line-height: 1; z-index: -1; }
+        h3 { color: var(--primary-green); font-size: 2rem; font-weight: 600; position: relative; display: inline-block; margin-top: 1rem; }
+        h3::after { content: ''; display: block; width: 50%; height: 3px; background: var(--secondary-green); margin-top: 5px; border-radius: 2px; }
+        p { margin-bottom: 1.5rem; font-size: 1.05rem; color: #4a4a4a; text-align: justify; }
+        
+        /* DIAGRAMAS E ELEMENTOS DIDÁTICOS */
+        .diagram-container {
+            background-color: var(--light-green);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            text-align: center;
+        }
+        .diagram-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Diagrama: Indivíduo e Sistema */
+        .system-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .sys-node {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            font-weight: 500;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+            position: relative;
+        }
+        .sys-center {
+            background: var(--primary-green);
+            color: white;
+            transform: scale(1.1);
+        }
+        .sys-arrow { color: var(--secondary-green); font-size: 1.5rem; }
+
+        /* Diagrama: Dicotomia (Cards lado a lado) */
+        .dichotomy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .dichotomy-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-top: 4px solid var(--primary-green);
+            text-align: left;
+        }
+        .dichotomy-card i { font-size: 2rem; color: var(--secondary-green); margin-bottom: 1rem; }
+        .dichotomy-card h5 { font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-dark); }
+        .dichotomy-card p { font-size: 0.9rem; margin-bottom: 0; line-height: 1.5; text-align: left; }
+
+        /* Diagrama: Círculos Concêntricos (Pertencimento) */
+        .concentric-circles {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            margin: 0 auto;
+        }
+        .circle {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 2px dashed var(--secondary-green);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary-green);
+            background: rgba(255,255,255,0.4);
+        }
+        .c1 { width: 250px; height: 250px; }
+        .c2 { width: 170px; height: 170px; }
+        .c3 { width: 90px; height: 90px; background: var(--primary-green); color: white; align-items: center; padding-top: 0; border-style: solid; }
+
+        /* Diagrama: Ciclo de Repetição */
+        .cycle-diagram {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 1rem 0;
+        }
+        .cycle-step {
+            width: 120px;
+            text-align: center;
+        }
+        .cycle-step i {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+            background: white;
+            width: 70px; height: 70px;
+            line-height: 70px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .cycle-step span { display: block; font-size: 0.85rem; font-weight: 500; }
+
+        /* Diagrama: Espectro de Diferenciação */
+        .spectrum-bar {
+            height: 10px;
+            background: linear-gradient(to right, #ccc, var(--primary-green), #ccc);
+            border-radius: 10px;
+            margin: 40px 0 20px;
+            position: relative;
+        }
+        .spectrum-points {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            top: -25px;
+        }
+        .s-point { text-align: center; width: 100px; }
+        .s-point .dot {
+            width: 20px; height: 20px; background: white; border: 4px solid var(--primary-green);
+            border-radius: 50%; margin: 0 auto 10px;
+        }
+        .s-point p { font-size: 0.8rem; font-weight: 600; text-align: center; margin: 0; line-height: 1.2; }
+
+        /* CARDS E DESTAQUES */
+        .exercise-card {
+            background-color: #FDFDFB;
+            border: 1px solid rgba(106, 107, 75, 0.15);
+            border-left: 6px solid var(--primary-green);
+            padding: 2.5rem;
+            margin: 3rem 0;
+            border-radius: 4px 12px 12px 4px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        }
+        .exercise-card h4 {
+            color: var(--primary-green);
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .exercise-card h4 i { font-size: 1.5rem; }
+        .question-list { list-style: none; }
+        .question-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1.2rem;
+            font-style: italic;
+            color: #444;
+            border-bottom: 1px dashed #e0e0e0;
+            padding-bottom: 0.5rem;
+        }
+        .question-list li:last-child { border-bottom: none; }
+        .question-list li::before {
+            content: '\f040';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--secondary-green);
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 0.9rem;
+        }
+
+        .highlight-box {
+            background: var(--primary-green);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2.5rem 0;
+            text-align: center;
+            border-left: 8px solid var(--secondary-green);
+        }
+        .highlight-box p { color: white; margin: 0; font-weight: 500; font-size: 1.15rem; font-style: italic; text-align: center; }
+
+        /* CTA BUTTON */
+        .btn-cta {
+            display: inline-block;
+            background-color: var(--white);
+            color: var(--primary-green);
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.95rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        .cta-box {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
+            margin: 3rem auto;
+            max-width: 600px;
+        }
+
+        /* FINAL */
+        .back-cover {
+            background-color: var(--primary-green);
+            color: white;
+            padding: 5rem 4rem;
+            text-align: center;
+            position: relative;
+        }
+        .back-cover h3 { color: white; }
+        .back-cover h3::after { background: rgba(255,255,255,0.3); }
+        .back-cover p { color: rgba(255,255,255,0.9); }
+        .references { margin-top: 4rem; text-align: left; font-size: 0.8rem; color: rgba(255,255,255,0.7); border-top: 1px solid rgba(255,255,255,0.2); padding-top: 2rem; }
+
+        /* MEDIA QUERIES E PRINT */
+        @media print {
+            .page-container { margin: 0; box-shadow: none; width: 100%; max-width: 100%; border-radius: 0; }
+            .cover, .content-section, .back-cover { page-break-after: always; }
+            .diagram-container, .exercise-card { break-inside: avoid; }
+            .bg-number { opacity: 0.05 !important; }
+            body { background: white; }
+        }
+        @media (max-width: 768px) {
+            .content-section { padding: 2rem 1.5rem; }
+            .dichotomy-grid { grid-template-columns: 1fr; }
+            .system-diagram { flex-direction: column; }
+            .sys-arrow { transform: rotate(90deg); }
+            .cycle-diagram { flex-direction: column; gap: 20px; }
+            .spectrum-points { flex-direction: column; gap: 20px; align-items: center; top: 0; }
+            .spectrum-bar { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-container">
+        
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+
+        <!-- CAPA -->
+        <section class="cover">
+            <div class="cover-frame">
+                <img src="https://i.ibb.co/39DCFB6B/logo-2.png" alt="Logo Nossa Aldeia" class="cover-logo">
+                <h1>NOSSA ALDEIA</h1>
+                <h2>Psicoterapia em Rede</h2>
+                <div class="decorative-line"></div>
+                <p style="font-size: 1.3rem; font-style: italic; color: #555; text-align: center;">Um convite para viver vínculos possíveis</p>
+                <div style="margin-top: 3rem;">
+                    <p style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; text-align: center;">Psicólogas fundadoras:<br>
+                    <span style="font-weight: 700; color: var(--primary-green); font-size: 1.1rem;">Bárbara Stūrmer & Eliane Cromack</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- APRESENTAÇÃO -->
+        <section class="content-section">
+            <div class="chapter-header">
+                <h3>Apresentação</h3>
+            </div>
+            
+            <p>Este e-book nasce da prática clínica e do desejo de sustentar espaços de pertencimento para pessoas solteiras que, em diferentes momentos da vida adulta, se veem atravessadas por questões profundas sobre amor, escolhas, tempo, solidão, autonomia e vínculo.</p>
+
+            <p>Na <strong>Nossa Aldeia - Psicoterapia em Rede</strong>, partimos do pressuposto sistêmico de que o sofrimento emocional não é um fenômeno exclusivamente individual, nem resultado apenas de traços de personalidade. Ele emerge e se mantém em contextos relacionais, históricos, familiares e culturais.</p>
+
+            <!-- DIAGRAMA DIDÁTICO 1 -->
+            <div class="diagram-container">
+                <div class="diagram-title">O Olhar Sistêmico sobre o Sofrimento</div>
+                <div class="system-diagram">
+                    <div class="sys-node">História Familiar</div>
+                    <i class="fa-solid fa-arrow-right-arrow-left sys-arrow"></i>
+                    <div class="sys-node sys-center"><i class="fa-solid fa-user"></i> Indivíduo</div>
+                    <i class="fa-solid fa-arrow-right-arrow-left sys-arrow"></i>
+                    <div class="sys-node">Cultura & Sociedade</div>
+                </div>
+                <p style="font-size: 0.85rem; text-align: center; margin-top: 15px; color: #666;">Emoções, sintomas e escolhas ganham sentido dentro dos sistemas aos quais pertencemos.</p>
+            </div>
+
+            <p>O trabalho em grupo, nesse sentido, configura-se como um recurso terapêutico potente. O grupo cria um campo relacional no qual histórias se encontram, padrões se tornam visíveis e novas narrativas podem ser construídas coletivamente.</p>
+
+            <div class="highlight-box">
+                <p><i class="fa-solid fa-quote-left" style="opacity: 0.5; margin-right: 10px;"></i>Este material não se propõe a oferecer respostas prontas ou fórmulas de felicidade. É um convite à reflexão clínica.</p>
+            </div>
+        </section>
+
+        <!-- CAPÍTULO 1 -->
+        <section class="content-section">
+            <div class="chapter-header">
+                <span class="bg-number">01</span>
+                <h3>O que significa estar solteiro(a) no mundo de hoje?</h3>
+            </div>
+            
+            <p>A experiência da solteirice, na contemporaneidade, é atravessada por discursos sociais ambivalentes. De um lado, há a valorização da autonomia, da liberdade individual e da autorrealização. De outro, permanece fortemente arraigada a expectativa de que a vida adulta se completa a partir de um relacionamento amoroso estável.</p>
+
+            <!-- DIAGRAMA DIDÁTICO 2 -->
+            <div class="diagram-container">
+                <div class="diagram-title">A Ambivalência da Solteirice</div>
+                <div class="dichotomy-grid">
+                    <div class="dichotomy-card">
+                        <i class="fa-solid fa-dove"></i>
+                        <h5>O Discurso da Autonomia</h5>
+                        <p>Valorização da liberdade individual, sucesso pessoal e autorrealização como metas principais.</p>
+                    </div>
+                    <div class="dichotomy-card">
+                        <i class="fa-solid fa-ring"></i>
+                        <h5>A Expectativa Social</h5>
+                        <p>Pressão invisível e crença de que a vida adulta só se "completa" através de um relacionamento amoroso estável.</p>
+                    </div>
+                </div>
+            </div>
+
+            <p>Do ponto de vista sistêmico, não falamos apenas de decisões individuais, mas de lealdades invisíveis, mandatos familiares e narrativas transgeracionais sobre amor, casamento, pertencimento, sucesso e fracasso.</p>
+
+            <div class="exercise-card">
+                <h4><i class="fa-solid fa-pen-clip"></i> Exercício Reflexivo: Linha do Tempo</h4>
+                <ul class="question-list">
+                    <li>Como a sua família de origem falava sobre casamento e solteirice?</li>
+                    <li>Houve alguém que ocupou o lugar de "solteiro(a) da família"? Como essa pessoa era vista?</li>
+                    <li>Em que momentos da sua vida estar solteiro(a) foi uma escolha? Em quais foi vivido como falta?</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- CAPÍTULO 2 -->
+        <section class="content-section">
+            <div class="chapter-header">
+                <span class="bg-number">02</span>
+                <h3>Pertencimento, exclusão e o medo de ficar só</h3>
+            </div>
+            
+            <p>Na Psicologia Sistêmica, o pertencimento é compreendido como uma necessidade humana fundamental. O medo da solidão raramente se refere apenas à ausência de um parceiro amoroso; ele costuma estar associado à ameaça simbólica de exclusão do sistema.</p>
+
+            <!-- DIAGRAMA DIDÁTICO 3 -->
+            <div class="diagram-container">
+                <div class="diagram-title">Sistemas de Pertencimento</div>
+                <div class="concentric-circles">
+                    <div class="circle c1">Sociedade & Cultura</div>
+                    <div class="circle c2">Família & Amigos</div>
+                    <div class="circle c3">O "Eu"</div>
+                </div>
+                <p style="font-size: 0.85rem; text-align: center; margin-top: 15px; color: #666;">O medo da solidão é, muitas vezes, o medo da exclusão dessas esferas.</p>
+            </div>
+
+            <p>Muitas pessoas permanecem em relações insatisfatórias ou disfuncionais não por amor, mas pelo receio de perder seu lugar relacional. Outras, ao contrário, evitam vínculos profundos como forma de proteção contra a rejeição.</p>
+
+            <div class="exercise-card">
+                <h4><i class="fa-solid fa-map-location-dot"></i> Exercício Reflexivo: Mapa do Pertencimento</h4>
+                <ul class="question-list">
+                    <li>Em quais sistemas você sente que pertence hoje? (família, trabalho, amigos, grupos)</li>
+                    <li>Onde você sente que precisa se adaptar excessivamente para não ser excluído(a)?</li>
+                    <li>O que muda na sua forma de se relacionar quando o medo da exclusão aparece?</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- CAPÍTULO 3 -->
+        <section class="content-section">
+            <div class="chapter-header">
+                <span class="bg-number">03</span>
+                <h3>Padrões repetitivos nos vínculos amorosos</h3>
+            </div>
+            
+            <p>Na perspectiva sistêmica, repetições não são vistas como coincidências. Elas indicam tentativas do sistema de resolver questões emocionais ainda não elaboradas.</p>
+
+            <!-- DIAGRAMA DIDÁTICO 4 -->
+            <div class="diagram-container">
+                <div class="diagram-title">O Ciclo dos Padrões Relacionais</div>
+                <div class="cycle-diagram">
+                    <div class="cycle-step">
+                        <i class="fa-solid fa-magnifying-glass-heart"></i>
+                        <span>Escolha Recorrente</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="color:#aaa;"></i>
+                    <div class="cycle-step">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span>Surgimento do Conflito</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="color:#aaa;"></i>
+                    <div class="cycle-step">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Reação de Defesa Aprendida</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="color:#aaa;"></i>
+                    <div class="cycle-step">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        <span>Repetição do Padrão</span>
+                    </div>
+                </div>
+                <p style="font-size: 0.85rem; text-align: center; margin-top: 15px; color: #666;">Tornar o padrão consciente é o primeiro passo para quebrá-lo.</p>
+            </div>
+            
+            <p>O trabalho terapêutico não tem como objetivo culpar o passado, mas torná-lo consciente. Quando o padrão é reconhecido, amplia-se o campo de escolha e diminui-se a repetição automática.</p>
+
+            <div class="exercise-card">
+                <h4><i class="fa-solid fa-glasses"></i> Exercício Reflexivo: Reconhecendo Padrões</h4>
+                <ul class="question-list">
+                    <li>Quais características se repetem nas suas relações amorosas?</li>
+                    <li>Que sentimentos costumam aparecer nos momentos de maior conflito?</li>
+                    <li>O que você tende a fazer para manter o vínculo quando ele se sente ameaçado?</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- CAPÍTULO 4 -->
+        <section class="content-section">
+            <div class="chapter-header">
+                <span class="bg-number">04</span>
+                <h3>Autonomia emocional e diferenciação do self</h3>
+            </div>
+            
+            <p>Autonomia emocional não significa independência absoluta ou ausência de necessidade do outro. Na teoria sistêmica (Bowen), a <strong>diferenciação do self</strong> refere-se à capacidade de sustentar a própria identidade emocional sem romper vínculos ou se fundir excessivamente ao outro.</p>
+
+            <!-- DIAGRAMA DIDÁTICO 5 -->
+            <div class="diagram-container" style="padding-bottom: 3rem;">
+                <div class="diagram-title">O Espectro da Relação</div>
+                <div class="spectrum-bar"></div>
+                <div class="spectrum-points">
+                    <div class="s-point">
+                        <div class="dot" style="background: #e74c3c; border-color: #c0392b;"></div>
+                        <p>Fusão / Dependência</p>
+                        <span style="font-size: 0.7rem; color: #777;">Perda da identidade individual</span>
+                    </div>
+                    <div class="s-point">
+                        <div class="dot" style="background: var(--primary-green); transform: scale(1.3);"></div>
+                        <p style="color: var(--primary-green);">Diferenciação do Self</p>
+                        <span style="font-size: 0.7rem; color: #777;">Identidade mantida dentro do vínculo</span>
+                    </div>
+                    <div class="s-point">
+                        <div class="dot" style="background: #95a5a6; border-color: #7f8c8d;"></div>
+                        <p>Isolamento Emocional</p>
+                        <span style="font-size: 0.7rem; color: #777;">Afastamento para se proteger</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <h4><i class="fa-solid fa-scale-balanced"></i> Exercício Reflexivo: Eu e o Outro</h4>
+                <ul class="question-list">
+                    <li>Em relações importantes, você tende a se adaptar demais ou a se afastar?</li>
+                    <li>O que você costuma abrir mão para manter um vínculo?</li>
+                    <li>Como reage quando o outro pensa, sente ou age de forma diferente de você?</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- CAPÍTULO 5 -->
+        <section class="content-section">
+            <div class="chapter-header">
+                <span class="bg-number">05</span>
+                <h3>O grupo como laboratório relacional</h3>
+            </div>
+            
+            <p>O grupo terapêutico pode ser compreendido como um microcosmo da vida relacional. Nele, padrões habituais de funcionamento emergem de forma espontânea, permitindo observação, nomeação e intervenção.</p>
+
+            <!-- DIAGRAMA DIDÁTICO 6 -->
+            <div class="diagram-container">
+                <div class="diagram-title">O Espelhamento no Grupo</div>
+                <div style="font-size: 3rem; color: var(--primary-green); margin-bottom: 10px;">
+                    <i class="fa-solid fa-users-viewfinder"></i>
+                </div>
+                <p style="font-size: 0.95rem; margin-bottom: 0;">A escuta do outro amplia a autorreferência. Ao reconhecer aspectos próprios nas narrativas alheias, ocorre um processo de reorganização interna. O vínculo passa a ser recurso terapêutico.</p>
+            </div>
+
+            <div class="exercise-card">
+                <h4><i class="fa-solid fa-people-group"></i> Exercício Reflexivo: Espelhamentos</h4>
+                <ul class="question-list">
+                    <li>O que nas histórias dos outros mais te mobiliza emocionalmente?</li>
+                    <li>Em quais falas você se reconhece?</li>
+                    <li>O que você aprende sobre si ao escutar o outro?</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- CAPÍTULO 6 & 7 (Integrados no final para fluxo) -->
+        <section class="content-section">
+            <div class="chapter-header">
+                <span class="bg-number">06</span>
+                <h3>Amor possível vs Amor Ideal</h3>
+            </div>
+            
+            <p>Grande parte do sofrimento amoroso contemporâneo está relacionada à busca por relações idealizadas. O amor possível é imperfeito, negociado, contextual e humano.</p>
+
+            <div class="diagram-container">
+                <div class="dichotomy-grid">
+                    <div class="dichotomy-card" style="border-top-color: #e74c3c;">
+                        <i class="fa-solid fa-cloud" style="color: #e74c3c;"></i>
+                        <h5>Amor Idealizado</h5>
+                        <p>Busca por perfeição, evitação de conflitos, expectativa de que o outro preencha todas as faltas.</p>
+                    </div>
+                    <div class="dichotomy-card" style="border-top-color: var(--primary-green);">
+                        <i class="fa-solid fa-handshake-angle" style="color: var(--primary-green);"></i>
+                        <h5>Amor Possível</h5>
+                        <p>Relação real, flexível. O conflito existe e é metabolizado. Aceitação da incompletude humana.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter-header" style="margin-top: 4rem;">
+                <span class="bg-number">07</span>
+                <h3>Escolhas conscientes e responsabilidade relacional</h3>
+            </div>
+            
+            <p>A solteirice pode ser compreendida não como um estado de espera, mas como um tempo legítimo de elaboração emocional, fortalecimento da identidade e construção de novas narrativas relacionais.</p>
+
+            <div class="exercise-card" style="background: #fff; border: 2px dashed var(--primary-green);">
+                <h4 style="color: var(--primary-green);"><i class="fa-solid fa-envelope-open-text"></i> Exercício Final: Carta para si</h4>
+                <p>Escreva uma carta para si mesmo(a) a partir do que você compreende hoje sobre seus vínculos, desejos e limites.</p>
+                <div style="margin-top: 2rem; width: 100%; height: 1px; background: #ddd;"></div>
+                <div style="margin-top: 2rem; width: 100%; height: 1px; background: #ddd;"></div>
+                <div style="margin-top: 2rem; width: 100%; height: 1px; background: #ddd;"></div>
+            </div>
+        </section>
+
+        <!-- CONTRACAPA -->
+        <footer class="back-cover">
+            <h3>Considerações Finais</h3>
+            <div style="width: 50px; height: 3px; background: rgba(255,255,255,0.5); margin: 1rem auto;"></div>
+            
+            <p style="max-width: 600px; margin: 0 auto 2rem auto; font-size: 1.1rem; line-height: 1.6;">
+                A Nossa Aldeia - Psicoterapia em Rede sustenta a premissa de que ninguém se constrói sozinho. Vínculos podem ferir, mas também podem curar, quando sustentados com consciência, responsabilidade e pertencimento.
+            </p>
+            
+            <p style="font-style: italic; opacity: 0.8; margin-bottom: 3rem;">
+                Que este material funcione como um disparador de reflexões e não como um ponto final. O caminho é relacional, vivo e em constante transformação.
+            </p>
+
+            <!-- CALL TO ACTION: GRUPO TERAPÊUTICO -->
+            <div class="cta-box">
+                <h4 style="color: white; font-size: 1.4rem; margin-bottom: 1rem; font-weight: 600;">
+                    <i class="fa-solid fa-seedling" style="margin-right: 10px; color: var(--secondary-green);"></i>Dê o próximo passo
+                </h4>
+                <p style="font-size: 1.05rem; margin-bottom: 2rem; color: rgba(255,255,255,0.9); line-height: 1.6;">
+                    Estamos abrindo uma lista de espera para o nosso <strong>Grupo Psicoterapêutico sobre Relacionamentos</strong>. Um espaço seguro para quem está solteiro ou está em um relacionamento. Vamos compartilhar, escutar e aprofundar na prática as reflexões deste e-book.
+                </p>
+                <a href="LINK_DA_SUA_LISTA_AQUI" target="_blank" class="btn-cta">Saber mais e entrar na lista</a>
+            </div>
+
+            <div class="references">
+                <strong>Referências Bibliográficas</strong>
+                <ul style="list-style: none; margin-top: 10px;">
+                    <li>BOWEN, M. Family Therapy in Clinical Practice. New York: Jason Aronson, 1978.</li>
+                    <li>CARTER, B.; McGOLDRICK, M. As mudanças no ciclo de vida familiar. Porto Alegre: Artmed, 2001.</li>
+                    <li>MINUCHIN, S. Famílias: funcionamento e tratamento. Porto Alegre: Artmed, 1982.</li>
+                    <li>SLUZKI, C. A rede social na prática sistêmica. São Paulo: Casa do Psicólogo, 1997.</li>
+                    <li>WALSH, F. Fortalecendo a resiliência familiar. São Paulo: Roca, 2005.</li>
+                    <li>ANDOLFI, M. A terapia familiar multigeracional. Porto Alegre: Artmed, 2013.</li>
+                </ul>
+            </div>
+            
+            <div style="margin-top: 4rem;">
+                <img src="https://i.ibb.co/39DCFB6B/logo-2.png" alt="Logo" style="filter: brightness(0) invert(1); opacity: 0.7; width: 120px;">
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
