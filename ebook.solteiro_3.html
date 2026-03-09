@@ -25,7 +25,7 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #eee;
+            background-color: var(--white);
             color: var(--text-dark);
             line-height: 1.8;
             -webkit-font-smoothing: antialiased;
@@ -33,13 +33,14 @@
 
         /* Estrutura da Página */
         .page-container {
-            max-width: 900px;
-            margin: 2rem auto;
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
             background: var(--white);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            box-shadow: none;
             position: relative;
             overflow: hidden;
-            border-radius: 8px;
+            border-radius: 0;
         }
 
         /* Elementos Gráficos de Fundo */
@@ -308,11 +309,95 @@
 
         /* MEDIA QUERIES E PRINT */
         @media print {
-            .page-container { margin: 0; box-shadow: none; width: 100%; max-width: 100%; border-radius: 0; }
-            .cover, .content-section, .back-cover { page-break-after: always; }
-            .diagram-container, .exercise-card { break-inside: avoid; }
+            @page {
+                size: A4;
+                margin: 0;
+            }
+
+            html, body {
+                width: 210mm;
+                background: white;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .page-container {
+                margin: 0;
+                box-shadow: none;
+                width: 100%;
+                max-width: 100%;
+                border-radius: 0;
+                overflow: visible;
+            }
+
+            /* Blobs decorativos desaparecem no print */
+            .blob { display: none; }
+
+            /* CAPA: página inteira, sem quebra depois */
+            .cover {
+                page-break-before: always;
+                page-break-after: always;
+                break-before: page;
+                break-after: page;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            /* APRESENTAÇÃO: começa em nova página */
+            .section-apresentacao {
+                page-break-before: always;
+                break-before: page;
+            }
+
+            /* Cada capítulo começa em nova página */
+            .section-cap1,
+            .section-cap2,
+            .section-cap3,
+            .section-cap4,
+            .section-cap5,
+            .section-cap6 {
+                page-break-before: always;
+                break-before: page;
+            }
+
+            /* Contracapa começa em nova página */
+            .back-cover {
+                page-break-before: always;
+                break-before: page;
+                page-break-after: avoid;
+            }
+
+            /* Elementos que NÃO devem ser cortados no meio */
+            .diagram-container,
+            .exercise-card,
+            .highlight-box,
+            .dichotomy-grid,
+            .cycle-diagram,
+            .concentric-circles,
+            .spectrum-points,
+            .cta-box,
+            .chapter-header,
+            .dichotomy-card {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            /* H3 nunca fica sozinho no fim da página */
+            h3 {
+                break-after: avoid;
+                page-break-after: avoid;
+            }
+
+            /* Parágrafo logo após título não quebra */
+            h3 + p {
+                break-before: avoid;
+                page-break-before: avoid;
+            }
+
             .bg-number { opacity: 0.05 !important; }
-            body { background: white; }
         }
         @media (max-width: 768px) {
             .content-section { padding: 2rem 1.5rem; }
@@ -348,7 +433,7 @@
         </section>
 
         <!-- APRESENTAÇÃO -->
-        <section class="content-section">
+        <section class="content-section section-apresentacao">
             <div class="chapter-header">
                 <h3>Apresentação</h3>
             </div>
@@ -378,7 +463,7 @@
         </section>
 
         <!-- CAPÍTULO 1 -->
-        <section class="content-section">
+        <section class="content-section section-cap1">
             <div class="chapter-header">
                 <span class="bg-number">01</span>
                 <h3>O que significa estar solteiro(a) no mundo de hoje?</h3>
@@ -416,7 +501,7 @@
         </section>
 
         <!-- CAPÍTULO 2 -->
-        <section class="content-section">
+        <section class="content-section section-cap2">
             <div class="chapter-header">
                 <span class="bg-number">02</span>
                 <h3>Pertencimento, exclusão e o medo de ficar só</h3>
@@ -448,7 +533,7 @@
         </section>
 
         <!-- CAPÍTULO 3 -->
-        <section class="content-section">
+        <section class="content-section section-cap3">
             <div class="chapter-header">
                 <span class="bg-number">03</span>
                 <h3>Padrões repetitivos nos vínculos amorosos</h3>
@@ -496,7 +581,7 @@
         </section>
 
         <!-- CAPÍTULO 4 -->
-        <section class="content-section">
+        <section class="content-section section-cap4">
             <div class="chapter-header">
                 <span class="bg-number">04</span>
                 <h3>Autonomia emocional e diferenciação do self</h3>
@@ -538,7 +623,7 @@
         </section>
 
         <!-- CAPÍTULO 5 -->
-        <section class="content-section">
+        <section class="content-section section-cap5">
             <div class="chapter-header">
                 <span class="bg-number">05</span>
                 <h3>O grupo como laboratório relacional</h3>
@@ -566,7 +651,7 @@
         </section>
 
         <!-- CAPÍTULO 6 & 7 (Integrados no final para fluxo) -->
-        <section class="content-section">
+        <section class="content-section section-cap6">
             <div class="chapter-header">
                 <span class="bg-number">06</span>
                 <h3>Amor possível vs Amor Ideal</h3>
